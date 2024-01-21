@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Jost', sans-serif;
+  @apply bg-[#f7f8fd]
+}
+.sidebar > * {
+  max-width: 20rem;
+}
+.sidebar-item {
+  @apply bg-white rounded-lg p-6 mt-[3rem];
+}
+.feedback {
+  @apply bg-white rounded-lg p-6 mt-[3rem];
+}
+p {
+  @apply text-darkgray;
+}
+.mobile-top-nav {
+  background: linear-gradient(125deg, #4C9FF0, #AC3BE5, #CA49AE, #E98987);
+  @apply px-4 py-2 text-white;
+}
