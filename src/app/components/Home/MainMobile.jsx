@@ -1,5 +1,5 @@
 import React from 'react'
-import Feedback from './Feedback'
+import Feedback from '../Feedback'
 
 function MainMobile() {
   return (

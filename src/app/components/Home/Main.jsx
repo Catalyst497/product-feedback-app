@@ -1,13 +1,13 @@
 import React from "react";
 import TopActionsBlck from "./TopActionsBlck";
-import Feedback from "./Feedback";
+import Feedbacks from "./Feedbacks";
 
 function Main() {
   return (
     <main className="flex-1">
       <TopActionsBlck />
       <div className="main">
-        <Feedback />
+        <Feedbacks />
       </div>
     </main>
   );

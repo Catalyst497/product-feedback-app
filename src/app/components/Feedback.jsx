@@ -1,7 +1,8 @@
 import React from "react";
 import { FaChevronUp, FaComment } from "react-icons/fa";
 
-function Feedback() {
+function Feedback({title, main, tag}) {
+  
   return (
     <div className="feedback">
       <div className="flex justify-between gap-6">
@@ -13,14 +14,14 @@ function Feedback() {
         </div>
         <div className="feedback-content flex-1">
           <div className="feedback-title font-bold text-[1.2rem] text-darkblue">
-            Add tags for solutions
+            {title}
           </div>
           <p className="feedback-main py-2">
-            Easier to search based on a specific stack
+            {main}
           </p>
           <div className="tag py-2">
             <div className="px-4 py-2 rounded-lg bg-faintblue text-lightblue inline-block font-bold">
-              Enhancement
+              {tag}
             </div>
           </div>
         </div>
