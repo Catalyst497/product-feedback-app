@@ -4,7 +4,7 @@ import { FaChevronUp, FaComment } from "react-icons/fa";
 function Feedback({title, main, tag}) {
   
   return (
-    <div className="feedback">
+    <div className="feedback" >
       <div className="flex justify-between gap-6">
         <div className="upvote-count">
           <div className="flex flex-col items-center text-lightblue bg-faintblue p-4 rounded-lg gap-2 font-bold">

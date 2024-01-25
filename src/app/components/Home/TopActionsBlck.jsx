@@ -1,10 +1,18 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaLightbulb, FaChevronDown } from "react-icons/fa";
 import useScreenSize from "../useScreenSize";
+import { useDispatch, useSelector } from "react-redux";
+import { setFeedbackFormOpen } from "@/app/slices/AppSlice";
 
 function TopActionsBlck() {
+  const dispatch = useDispatch();
+  const { feedbackFormOpen } = useSelector((state) => state.app);
   const { isMobile, isTablet, isDesktop } = useScreenSize();
+  const addFeedback = () => {
+    dispatch(setFeedbackFormOpen());
+  };
+
   return (
     <nav className="flex gap-10 items-center px-4 py-2 md:py-5 justify-between bg-darkblue text-white md:rounded-lg">
       {!isMobile && (
@@ -19,7 +27,12 @@ function TopActionsBlck() {
         <span className="opacity-70">Sort by: </span>Most Upvotes{" "}
         <FaChevronDown className="inline-block" />
       </div>
-      <button className="bg-purple px-4 py-2 rounded-lg">+ Add Feedback</button>
+      <button
+        className="bg-purple px-4 py-2 rounded-lg"
+        onClick={() => addFeedback()}
+      >
+        + Add Feedback
+      </button>
     </nav>
   );
 }

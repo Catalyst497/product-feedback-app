@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function useScreenSize() {
-  const [screenSize, setScreenSize] = useState(0);
+  const [screenSize, setScreenSize] = useState(null);
   const breakpoints = {
     isMobile: screenSize < 767,
     isTablet: screenSize > 767 && screenSize < 991,

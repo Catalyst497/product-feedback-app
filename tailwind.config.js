@@ -13,6 +13,7 @@ module.exports = {
         'purple': '#ae1feb',
         'faintblue': '#f2f4ff',
         'darkgray': '#7e8aa9',
+        'lightgray': '#f7f8fd'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
