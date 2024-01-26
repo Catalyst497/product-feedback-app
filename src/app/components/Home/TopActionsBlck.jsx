@@ -14,7 +14,7 @@ function TopActionsBlck() {
   };
 
   return (
-    <nav className="flex gap-10 items-center px-4 py-2 md:py-5 justify-between bg-darkblue text-white md:rounded-lg">
+    <nav className="flex gap-2 md:gap-10 items-center px-4 py-2 md:py-5 md:px-4 justify-between bg-darkblue text-white md:rounded-lg">
       {!isMobile && (
         <div className="flex gap-6 items-center">
           <span>

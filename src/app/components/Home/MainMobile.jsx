@@ -1,9 +1,9 @@
 import React from 'react'
-import Feedback from '../Feedback'
+import Feedbacks from './Feedbacks'
 
 function MainMobile() {
   return (
-    <main className='main px-6'><Feedback /></main>
+    <main className='main px-3'><Feedbacks /></main>
   )
 }
 

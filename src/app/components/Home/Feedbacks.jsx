@@ -1,9 +1,11 @@
 import React from "react";
 import Feedback from "../Feedback";
 import { useSelector } from "react-redux";
+import useScreenSize from "../useScreenSize";
 
 function Feedbacks() {
   const { feedbackFormOpen } = useSelector((st) => st.app);
+  const {isMobile, isTablet, isDesktop} = useScreenSize()
   const FeedbacksArr = [
     {
       title: "Add tags for solutions",
@@ -25,7 +27,7 @@ function Feedbacks() {
     <>
       {feedbackFormOpen ? (
         <div className="feedback-form-container bg-white flex justify-center py-6 mt-4 rounded-lg">
-          <form action="" className="feedback-form flex gap-6 *:border-green-500 w-[90%]">
+          <form action="" className={`feedback-form ${!isMobile ? 'flex' : ''} gap-6 *:border-green-500 w-[90%]`}>
             <div className="flex-1">
               <input
                 type="text"
