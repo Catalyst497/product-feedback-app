@@ -7,8 +7,8 @@ function Feedback({ title, main, tag }) {
   return (
     <div className="feedback">
       <div className="flex justify-between gap-6">
-        <div className={`flex flex-col justify-start items-center gap-10`}>
-          <div className="upvote-count flex flex-col items-center text-lightblue bg-faintblue p-4 rounded-lg gap-2 font-bold">
+        <div className={isMobile ? `flex flex-col justify-start items-center gap-10` : ''}>
+          <div className="upvote-count   flex flex-col items-center text-lightblue bg-faintblue p-4 rounded-lg gap-2 font-bold">
             <FaChevronUp />
             <div>112</div>
           </div>
