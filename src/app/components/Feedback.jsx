@@ -6,13 +6,13 @@ function Feedback({ title, main, tag }) {
   const {isMobile} = useScreenSize()
   return (
     <div className="feedback">
-      <div className="flex justify-between gap-6">
+      <div className="flex justify-between gap-4 md:gap-6">
         <div className={isMobile ? `flex flex-col justify-start items-center gap-10` : ''}>
-          <div className="upvote-count   flex flex-col items-center text-lightblue bg-faintblue p-4 rounded-lg gap-2 font-bold">
+          <div className="upvote-count flex flex-col items-center text-lightblue bg-faintblue p-2 md:p-4 rounded-lg gap-2 font-bold">
             <FaChevronUp />
             <div>112</div>
           </div>
-          {isMobile && <div className="flex gap-4 items-center ">
+          {isMobile && <div className="flex gap-2 items-center ">
             <FaComment className="text-darkgray" />{" "}
             <span className="text-darkblue font-bold">2</span>
           </div>}

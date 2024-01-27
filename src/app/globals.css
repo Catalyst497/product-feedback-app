@@ -15,7 +15,7 @@ body {
   @apply bg-white rounded-lg p-6 mt-[3rem];
 }
 .feedback {
-  @apply bg-white rounded-lg p-6 mt-4;
+  @apply bg-white rounded-lg p-4 md:p-6 mt-4;
 }
 p {
   @apply text-darkgray;
