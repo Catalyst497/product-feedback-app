@@ -33,3 +33,14 @@ p {
 .button-hollow-black:hover {
   @apply bg-darkblue text-white ;
 }
+
+.login-page {
+  background: linear-gradient(125deg, #4C9FF0, #AC3BE5, #CA49AE, #E98987);
+  @apply min-h-screen w-screen overflow-auto;
+}
+.login-page a {
+  @apply text-purple underline;
+}
+.login-page input {
+  @apply w-full my-2 md:my-6 p-2 md:p-4 bg-lightgray outline-none focus:outline-none border-none rounded;
+}

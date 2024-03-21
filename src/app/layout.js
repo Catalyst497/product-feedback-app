@@ -1,6 +1,6 @@
 import { Inter, Jost } from "next/font/google";
 import "./globals.css";
-
+import { Providers } from "./GlobalRedux/provider";
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -11,8 +11,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html lang="en">
-        <body className={jost.className}>{children}</body>
-      </html>
+    <html lang="en">
+      <body className={jost.className}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
   );
 }

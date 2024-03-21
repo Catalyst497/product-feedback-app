@@ -4,12 +4,9 @@ import NavMobile from "./components/Home/NavMobile";
 import SideBar from "./components/Home/SideBar";
 import useScreenSize from "./components/useScreenSize";
 import MainMobile from "./components/Home/MainMobile";
-import { Provider } from "react-redux";
-import store from "@/store/store";
 export default function Home() {
   const { isDesktop, isMobile, isTablet } = useScreenSize();
   return (
-    <Provider store={store}>
       <div className="md:flex md:justify-center">
         {isMobile && <NavMobile />}
         <div
@@ -27,6 +24,5 @@ export default function Home() {
           )}
         </div>
       </div>
-    </Provider>
   );
 }

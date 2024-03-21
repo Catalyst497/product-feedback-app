@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaLightbulb, FaChevronDown } from "react-icons/fa";
 import useScreenSize from "../useScreenSize";
 import { useDispatch, useSelector } from "react-redux";
-import { setFeedbackFormOpen } from "@/app/slices/AppSlice";
+import { setFeedbackFormOpen } from "../../GlobalRedux/slices/AppSlice";
 
 function TopActionsBlck() {
   const dispatch = useDispatch();
