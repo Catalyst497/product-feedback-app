@@ -34,13 +34,23 @@ p {
   @apply bg-darkblue text-white ;
 }
 
-.login-page {
+.auth-page {
   background: linear-gradient(125deg, #4C9FF0, #AC3BE5, #CA49AE, #E98987);
   @apply min-h-screen w-screen overflow-auto;
 }
-.login-page a {
+.auth-page a {
   @apply text-purple underline;
 }
-.login-page input {
-  @apply w-full my-2 md:my-6 p-2 md:p-4 bg-lightgray outline-none focus:outline-none border-none rounded;
+.auth-page .input-field {
+  @apply w-full my-2 md:my-6 p-2 bg-lightgray rounded;
 }
+.auth-page input {
+  @apply outline-none focus:outline-none border-none bg-transparent h-full;
+}
+
+
+/* .auth-page input {
+  @apply w-full my-2 md:my-6 p-2 md:p-4 bg-lightgray outline-none focus:outline-none border-none rounded;
+} */
+
+
