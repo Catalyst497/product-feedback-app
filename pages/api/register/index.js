@@ -6,7 +6,7 @@ import bcryptjs from "bcryptjs";
 // import { NextRequest, NextResponse } from "next/server";
 
 export default async function POST(req, res) {
-  connect();
+  await connect();
   try {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const reqBody = await req.body;
@@ -20,7 +20,7 @@ export default async function POST(req, res) {
     const user = await User.findOne({ email });
     if (user) {
       return res.json({
-        message: "You already have an account with us. Please login",
+        error: "You already have an account with us. Please login.",
       });
     }
 
@@ -43,7 +43,7 @@ export default async function POST(req, res) {
     console.log(savedUser);
 
     return res.json({
-      message: "User created successfully",
+      message: "User created successfully.",
       success: true,
       savedUser,
     });

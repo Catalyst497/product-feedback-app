@@ -9,7 +9,7 @@ function page() {
   });
 
   const handleFormSubmit = async () => {
-    console.log("FUnction was called");
+    console.log("Function was called");
     if(!user.email) return;
     if(!user.password) return;
     const response = await axios.post(`/api/login`, user)
