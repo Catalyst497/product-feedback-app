@@ -45,7 +45,7 @@ p {
   @apply w-full my-2 md:my-6 p-2 bg-lightgray rounded;
 }
 .auth-page input {
-  @apply outline-none focus:outline-none border-none bg-transparent h-full;
+  @apply outline-none focus:outline-none border-none bg-transparent h-full min-w-[80%];
 }
 
 

@@ -1,9 +1,11 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function page() {
+  const router = useRouter()
   const [user, setUser] = useState({
     email: "",
     username: "",
@@ -16,11 +18,14 @@ function page() {
     console.log("Function was called");
     if (!user.email) return setPageError('Please enter your email address.');
     if (!user.username) return setPageError('Please fill the username field.');
-    if (!user.password) return setPageError('Please fill the password field.');;
+    if (!user.password) return setPageError('Please fill the password field.');
     const response = await axios.post(`/api/register`, user);
     console.log(response);
-    const {error} = response.data;
+    const {error, success} = response.data;
     if(error) setPageError(error);
+    if(success) setPageError(null)
+    router.push('/')
+
   };
 
   useEffect(() => {console.log(pageError)}, [pageError])
