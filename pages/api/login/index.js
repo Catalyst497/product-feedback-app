@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "@/dbConfig/dbConfig.js";
 import User from "@/models/userModel";
-import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -41,7 +40,7 @@ async function POST(req, res) {
     };
     //create token
     const token = jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {
-      expiresIn: "1d",
+      expiresIn: "1h",
     });
 
     return res

@@ -3,16 +3,34 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
-
+import Loader from "../components/Loader";
+import useAuthorize from "../hooks/useAuthorize";
 function page() {
-  const router = useRouter()
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const authStatus = await useAuthorize();
+        if (authStatus === true) {
+          router.push("/");
+        } else {
+          setLoading(false);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    checkAuth();
+  }, []);
+
+  const router = useRouter();
   const [pageError, setPageError] = useState(null);
-  const [passwordVisible, setPasswordVisible] = useState(false)
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+ 
 
   const handleFormSubmit = async () => {
     console.log("Function was called");
@@ -20,12 +38,14 @@ function page() {
     if (!user.password) return setPageError("Please fill the password field.");
     const response = await axios.post(`/api/login`, user);
     console.log(response);
-    const {error, success} = response.data;
-    if(error) return setPageError(error);
-    if(success) setPageError(null)
-    router.push('/')
+    const { error, success, token } = response.data;
+    if (error) return setPageError(error);
+    setPageError(null);
+    if (token) localStorage.setItem("token", token);
+    router.push("/");
   };
 
+  if(loading) return <Loader />
   return (
     <div className="auth-page flex justify-center items-center py-[5rem]">
       <div className="form-container bg-white rounded-lg p-6 md:p-8 w-[85%] sm:w-[50%] md:w-[50%] max-w-[30rem]">
@@ -52,7 +72,7 @@ function page() {
             </div>
             <div className="input-field flex justify-between items-center">
               <input
-                type={passwordVisible ? "text" : 'password'}
+                type={passwordVisible ? "text" : "password"}
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
               <span className="password-visibility-icon">
