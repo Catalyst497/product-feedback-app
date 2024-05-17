@@ -1,6 +1,6 @@
 import React from "react";
 import { ProgressBar } from "react-loader-spinner";
-import useScreenSize from "./useScreenSize";
+import useScreenSize from "../hooks/useScreenSize";
 
 function Loader() {
   const {isMobile, isTablet, isDesktop} = useScreenSize()

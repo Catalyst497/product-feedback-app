@@ -20,7 +20,6 @@ async function POST(req, res) {
 
     // check if user exists
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.json({
         error:
@@ -37,6 +36,7 @@ async function POST(req, res) {
     const tokenData = {
       id: user._id,
       email: user.email,
+      username: user.username,
     };
     //create token
     const token = jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {

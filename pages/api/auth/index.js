@@ -11,7 +11,6 @@ async function handler(req, res) {
     }
 
     const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_TOKEN_SECRET);
-    console.log(decoded)
     return res.status(200).json({message: 'User authorized.', user: decoded})
   } catch (error) {
     if (error.name === 'TokenExpiredError') {

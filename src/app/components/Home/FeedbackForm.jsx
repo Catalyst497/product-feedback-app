@@ -1,21 +1,46 @@
 "use client";
-import React from "react";
-import { useSelector } from "react-redux";
-import useScreenSize from "../useScreenSize";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import useScreenSize from "../../hooks/useScreenSize";
+import {
+  setFeedbackFormOpen,
+  setFeedbacks,
+} from "@/app/GlobalRedux/slices/AppSlice";
+import useUpdateFeedbacks from "@/app/hooks/useUpdateFeedbacks";
 import axios from "axios";
 
 function FeedbackForm() {
+  const dispatch = useDispatch();
   const { feedbackFormOpen } = useSelector((st) => st.app);
+  const { user } = useSelector((st) => st.user);
   const { isMobile, isTablet, isDesktop } = useScreenSize();
+
+  const [feedback, setFeedback] = useState({
+    title: "",
+    body: "",
+    author: "",
+  });
+
+  useEffect(() => {
+    setFeedback({ ...feedback, author: user });
+  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (!user) return;
     try {
-      const res = await axios.post("/api/register", {
-        username: "friend",
-        bush: "Cap",
-      });
+      const res = await axios.post("/api/feedback", feedback);
       console.log(res);
+      if (res.data === "New Feedback successsfully saved.") {
+        const updatedFeedbacks = await useUpdateFeedbacks()
+        dispatch(setFeedbacks(updatedFeedbacks));
+        setFeedback({
+          title: "",
+          body: "",
+          author: user,
+        });
+        dispatch(setFeedbackFormOpen(false));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -36,6 +61,10 @@ function FeedbackForm() {
                 type="text"
                 placeholder="Input the Title of your Feedback"
                 className="block bg-lightgray px-4 py-2 w-full"
+                value={feedback.title}
+                onChange={(e) =>
+                  setFeedback({ ...feedback, title: e.target.value })
+                }
               />
               <textarea
                 name=""
@@ -44,6 +73,10 @@ function FeedbackForm() {
                 rows="5"
                 className="bg-lightgray mt-4 rounded-lg w-full px-4 py-2"
                 placeholder="Body of your feedback goes here."
+                value={feedback.body}
+                onChange={(e) =>
+                  setFeedback({ ...feedback, body: e.target.value })
+                }
               ></textarea>
             </div>
             <div className="flex">

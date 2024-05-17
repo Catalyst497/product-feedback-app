@@ -3,9 +3,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { jwtDecode } from "jwt-decode";
 import Loader from "../components/Loader";
 import useAuthorize from "../hooks/useAuthorize";
+import { useDispatch } from "react-redux";
+import { setUserState } from "../GlobalRedux/slices/UserSlice";
+
 function page() {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function checkAuth() {
@@ -41,7 +46,14 @@ function page() {
     const { error, success, token } = response.data;
     if (error) return setPageError(error);
     setPageError(null);
-    if (token) localStorage.setItem("token", token);
+    if (token) {
+      const decoded = jwtDecode(token);
+      if (decoded) {
+        dispatch(setUserState(decoded));
+      }
+    } else return console.log('token is falsy. Why??');
+
+    localStorage.setItem("token", token);
     router.push("/");
   };
 

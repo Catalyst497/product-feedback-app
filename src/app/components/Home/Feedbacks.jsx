@@ -1,8 +1,13 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import axios from "axios";
 import Feedback from "../Feedback";
 import FeedbackForm from "./FeedbackForm";
+import { useSelector } from "react-redux";
 
 function Feedbacks() {
+  const { feedbacks } = useSelector((st) => st.app);
+  useEffect(() => {console.log(feedbacks)}, [feedbacks]);
   const FeedbacksArr = [
     {
       title: "Add tags for solutions",
@@ -24,9 +29,9 @@ function Feedbacks() {
   return (
     <>
       <FeedbackForm />
-      {FeedbacksArr.map((feedback, i) => {
-        const { title, main, tag } = feedback;
-        return <Feedback title={title} main={main} tag={tag} key={i} />;
+      {feedbacks.length && feedbacks?.map((feedback, i) => {
+        const { title, body, author, _id } = feedback;
+        return <Feedback title={title} main={body} author={author} key={i} id={_id} />;
       })}
     </>
   );

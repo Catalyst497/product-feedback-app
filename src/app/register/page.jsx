@@ -22,7 +22,7 @@ function page() {
     const response = await axios.post(`/api/register`, user);
     console.log(response);
     const {error, success} = response.data;
-    if(error) setPageError(error);
+    if(error) return setPageError(error);
     if(success) setPageError(null)
     router.push('/')
 

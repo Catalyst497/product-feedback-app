@@ -6,7 +6,7 @@ function Main() {
   return (
     <main className="flex-1">
       <TopActionsBlck />
-      <div className="main">
+      <div className="main max-h-screen overflow-y-auto">
         <Feedbacks />
       </div>
     </main>

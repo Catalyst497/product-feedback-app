@@ -2,14 +2,18 @@
 import Main from "./components/Home/Main";
 import NavMobile from "./components/Home/NavMobile";
 import SideBar from "./components/Home/SideBar";
-import useScreenSize from "./components/useScreenSize";
+import useScreenSize from "./hooks/useScreenSize";
 import MainMobile from "./components/Home/MainMobile";
 import useAuthorize from "./hooks/useAuthorize";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+  const router = useRouter()
   const [loading, setLoading] = useState(true);
   const { isDesktop, isMobile, isTablet } = useScreenSize();
+
   useEffect(() => {
     async function checkAuth() {
       try {
@@ -20,6 +24,7 @@ export default function Home() {
           router.push("/login");
         }
       } catch (err) {
+        router.push("/login");
         console.log(err);
       }
     }

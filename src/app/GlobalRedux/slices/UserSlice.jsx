@@ -1,13 +1,17 @@
-'use client'
-import {createSlice} from "@reduxjs/toolkit";
+"use client";
+import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
+    user: {},
   },
   reducers: {
-  }
-})
+    setUserState: function (state, { payload }) {
+      state.user = payload;
+    },
+  },
+});
 
 export default userSlice.reducer;
-export const {theme, font} = userSlice.actions
+export const { setUserState } = userSlice.actions;
