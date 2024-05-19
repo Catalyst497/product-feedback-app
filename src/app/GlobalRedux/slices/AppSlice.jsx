@@ -5,7 +5,8 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     feedbackFormOpen: false,
-    feedbacks: []
+    feedbacks: [],
+    sideBarOpen: false
   },
   reducers: {
     setFeedbackFormOpen(state, { payload }) {
@@ -13,9 +14,12 @@ const appSlice = createSlice({
     },
     setFeedbacks: (state, {payload}) => {
       state.feedbacks = payload
-    }
+    },
+    setSideBarOpen(state, { payload }) {
+      state.sideBarOpen = payload;
+    },
   },
 });
 
 export default appSlice.reducer;
-export const { setFeedbackFormOpen, setFeedbacks } = appSlice.actions;
+export const { setFeedbackFormOpen, setFeedbacks, setSideBarOpen } = appSlice.actions;

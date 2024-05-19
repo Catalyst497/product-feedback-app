@@ -8,6 +8,7 @@ import useAuthorize from "./hooks/useAuthorize";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import { useRouter } from "next/navigation";
+import SideMenu from "./components/SideMenu";
 
 export default function Home() {
   const router = useRouter()
@@ -33,6 +34,7 @@ export default function Home() {
   if (loading) return <Loader />
   return (
     <div className="md:flex md:justify-center">
+      {isMobile && <SideMenu />}
       {isMobile && <NavMobile />}
       <div
         className={`page flex gap-4  ${isDesktop && "w-[80%]"} ${

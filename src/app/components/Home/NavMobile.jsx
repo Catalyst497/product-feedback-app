@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { FaBars } from "react-icons/fa";
 import TopActionsBlck from "./TopActionsBlck";
+import { setSideBarOpen } from "@/app/GlobalRedux/slices/AppSlice";
 
 function NavMobile() {
+  const dispatch = useDispatch()
   return (
     <>
       <nav className="mobile-top-nav flex justify-between items-center ">
@@ -11,7 +14,7 @@ function NavMobile() {
           <div className="opacity-60">Feedback Board</div>
         </div>
         <div>
-          <FaBars size={28} />
+          <FaBars size={28} onClick={() => dispatch(setSideBarOpen(true))} />
         </div>
       </nav>
       <TopActionsBlck />

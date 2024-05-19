@@ -4,12 +4,13 @@ import useScreenSize from "../hooks/useScreenSize";
 import { BsThreeDots } from "react-icons/bs";
 import axios from "axios";
 import useUpdateFeedbacks from "../hooks/useUpdateFeedbacks";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setFeedbacks } from "../GlobalRedux/slices/AppSlice";
 
 function Feedback({ title, main, author, id }) {
   const dispatch = useDispatch();
   const { isMobile } = useScreenSize();
+  const { user } = useSelector((state) => state.user);
   const [openFeedbackOptions, setOpenFeedbackOptions] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [feedbackUpdate, setFeedbackUpdate] = useState({
@@ -24,7 +25,7 @@ function Feedback({ title, main, author, id }) {
   const handleClickOutside = (e) => {
     if (
       parentRef.current &&
-      parentRef.current.contains(e.target) &&
+      parentRef.current .contains(e.target) &&
       menuRef.current &&
       !menuRef.current.contains(e.target)
     ) {
@@ -124,7 +125,9 @@ function Feedback({ title, main, author, id }) {
                     title: e.target.value,
                   })
                 }
-                className="border-solid border-faintblue border-[2px] outline-none rounded-lg mb-4 w-[70%]"
+                className={`border-solid border-faintblue border-[2px] outline-none rounded-lg mb-4 ${
+                  isMobile ? "w-full" : "w-[70%]"
+                }`}
               />
             ) : (
               <span>{title}</span>
@@ -137,7 +140,9 @@ function Feedback({ title, main, author, id }) {
               onChange={(e) =>
                 setFeedbackUpdate({ ...feedbackUpdate, body: e.target.value })
               }
-              className="border-solid border-faintblue border-[2px] outline-none rounded-lg mb-4 w-[70%]"
+              className={`border-solid border-faintblue border-[2px] outline-none rounded-lg mb-4 ${
+                isMobile ? "w-full" : " w-[70%]"
+              }`}
             />
           ) : (
             <p className="feedback-main py-2">{main}</p>
@@ -156,43 +161,45 @@ function Feedback({ title, main, author, id }) {
             </div>
           </div>   */}
         </div>
-        <div
-          ref={menuRef}
-          className={`feedback-menu relative md:self-center ${
-            isMobile ? "mt-3" : "mr-4"
-          }`}
-        >
-          {openFeedbackOptions && (
-            <ul
-              className={`absolute bg-white rounded-lg p-2 text-black ${
-                isMobile ? "top-[20%] -left-[200%]" : "top-full -left-full"
-              }  z-10 drop-shadow-lg`}
-            >
-              <li
-                onClick={() => {
-                  setEditMode(true);
-                  setOpenFeedbackOptions(false);
-                }}
-                className="py-2 px-4 cursor-default"
+        {user.id == author._id && (
+          <div
+            ref={menuRef}
+            className={`feedback-menu relative md:self-center ${
+              isMobile ? "mt-3" : "mr-4"
+            }`}
+          >
+            {openFeedbackOptions && (
+              <ul
+                className={`absolute bg-white rounded-lg p-2 text-black ${
+                  isMobile ? "top-[20%] -left-[200%]" : "top-full -left-full"
+                }  z-10 drop-shadow-lg`}
               >
-                Edit
-              </li>
-              <hr className="text-center" />
-              <li
-                className="text-red-600 py-2 px-4 cursor-default"
-                onClick={() => deleteFeedback()}
-              >
-                Delete
-              </li>
-            </ul>
-          )}
-          <div className="flex gap-4 items-center">
-            <BsThreeDots
-              size={isMobile ? 28 : 32}
-              onClick={() => setOpenFeedbackOptions(!openFeedbackOptions)}
-            />
+                <li
+                  onClick={() => {
+                    setEditMode(true);
+                    setOpenFeedbackOptions(false);
+                  }}
+                  className="py-2 px-4 cursor-default"
+                >
+                  Edit
+                </li>
+                <hr className="text-center" />
+                <li
+                  className="text-red-600 py-2 px-4 cursor-default"
+                  onClick={() => deleteFeedback()}
+                >
+                  Delete
+                </li>
+              </ul>
+            )}
+            <div className="flex gap-4 items-center">
+              <BsThreeDots
+                size={isMobile ? 28 : 32}
+                onClick={() => setOpenFeedbackOptions(!openFeedbackOptions)}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

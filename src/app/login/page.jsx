@@ -8,10 +8,12 @@ import Loader from "../components/Loader";
 import useAuthorize from "../hooks/useAuthorize";
 import { useDispatch } from "react-redux";
 import { setUserState } from "../GlobalRedux/slices/UserSlice";
+import { TailSpin } from "react-loader-spinner";
 
 function page() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [callLoading, setCallLoading] = useState(false);
   useEffect(() => {
     async function checkAuth() {
       try {
@@ -35,29 +37,32 @@ function page() {
     email: "",
     password: "",
   });
- 
 
   const handleFormSubmit = async () => {
-    console.log("Function was called");
     if (!user.email) return setPageError("Please enter your email address.");
     if (!user.password) return setPageError("Please fill the password field.");
+    setCallLoading(true);
     const response = await axios.post(`/api/login`, user);
     console.log(response);
     const { error, success, token } = response.data;
-    if (error) return setPageError(error);
+    if (error) {
+      setCallLoading(false);
+      return setPageError(error);
+    }
     setPageError(null);
     if (token) {
       const decoded = jwtDecode(token);
       if (decoded) {
         dispatch(setUserState(decoded));
       }
-    } else return console.log('token is falsy. Why??');
+    } else return console.log("token is falsy. Why??");
 
     localStorage.setItem("token", token);
+setCallLoading(false)
     router.push("/");
   };
 
-  if(loading) return <Loader />
+  if (loading) return <Loader />;
   return (
     <div className="auth-page flex justify-center items-center py-[5rem]">
       <div className="form-container bg-white rounded-lg p-6 md:p-8 w-[85%] sm:w-[50%] md:w-[50%] max-w-[30rem]">
@@ -103,9 +108,10 @@ function page() {
             <button
               type="button"
               onClick={handleFormSubmit}
-              className="text-center py-4 rounded-lg w-full bg-purple text-white my-4 md:mt-8 md:mb-4"
+              className="relative text-center py-4 rounded-lg w-full bg-purple text-white my-4 md:mt-8 md:mb-4"
             >
               Login
+              {callLoading && <TailSpin color="white" height={30} className="" />}
             </button>
           </div>
           <div>
