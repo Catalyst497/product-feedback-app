@@ -14,11 +14,12 @@ export default function Home() {
   const router = useRouter()
   const [loading, setLoading] = useState(true);
   const { isDesktop, isMobile, isTablet } = useScreenSize();
+  const authFunc = useAuthorize();
 
   useEffect(() => {
     async function checkAuth() {
       try {
-        const authStatus = await useAuthorize();
+        const authStatus = await authFunc();
         if (authStatus === true) {
           setLoading(false);
         } else {

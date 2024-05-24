@@ -14,10 +14,11 @@ function Login() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [callLoading, setCallLoading] = useState(false);
+  const authFunc = useAuthorize()
   useEffect(() => {
     async function checkAuth() {
       try {
-        const authStatus = await useAuthorize();
+        const authStatus = await authFunc();
         if (authStatus === true) {
           router.push("/");
         } else {

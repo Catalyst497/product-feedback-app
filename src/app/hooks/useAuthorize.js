@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React from "react";
 import axios from "axios";
 
-async function useAuthorize() {
-    const token = localStorage.getItem("token"); // Retrieve token from local storage
+function useAuthorize() {
+  const token = localStorage.getItem("token"); // Retrieve token from local storage
 
+  const authFunc = async () => {
     if (!token) {
       return false;
     } else {
@@ -25,6 +26,9 @@ async function useAuthorize() {
         return false;
       }
     }
+  };
+
+  return authFunc  
 }
 
 export default useAuthorize;

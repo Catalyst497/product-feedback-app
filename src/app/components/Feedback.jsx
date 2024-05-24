@@ -96,14 +96,14 @@ function Feedback({ title, main, author, id }) {
                 className="avatar-img w-[2rem] md:w-[3rem] rounded-[40%]"
               />
               {isMobile && (
-                <div className="text-[1.2rem] font-bold text-darkblue">
+                <div className="text-[1.2rem] font-bold text-darkblue capitalize">
                   {author.username}
                 </div>
               )}
             </div>
             <div>
               {!isMobile && (
-                <div className="text-[1.2rem] font-bold text-darkblue">
+                <div className="text-[1.2rem] font-bold text-darkblue capitalize">
                   {author.username}
                 </div>
               )}
