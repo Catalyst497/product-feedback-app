@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-function page() {
+function Register() {
   const router = useRouter()
   const [user, setUser] = useState({
     email: "",
@@ -96,4 +96,4 @@ function page() {
   );
 }
 
-export default page;
+export default Register;

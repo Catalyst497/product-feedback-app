@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { setUserState } from "../GlobalRedux/slices/UserSlice";
 import { TailSpin } from "react-loader-spinner";
 
-function page() {
+function Login() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [callLoading, setCallLoading] = useState(false);
@@ -123,4 +123,4 @@ setCallLoading(false)
   );
 }
 
-export default page;
+export default Login;
