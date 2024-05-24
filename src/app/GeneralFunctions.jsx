@@ -34,7 +34,7 @@ function GeneralFunctions({ children }) {
     if (Object.keys(user)) {
       getFeedbacks();
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   return <>{children}</>;
 }

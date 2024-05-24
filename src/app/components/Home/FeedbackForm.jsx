@@ -11,6 +11,7 @@ import axios from "axios";
 
 function FeedbackForm() {
   const dispatch = useDispatch();
+  const getUpdatedFeedbacks = useUpdateFeedbacks()
   const { feedbackFormOpen } = useSelector((st) => st.app);
   const { user } = useSelector((st) => st.user);
   const { isMobile, isTablet, isDesktop } = useScreenSize();
@@ -32,7 +33,7 @@ function FeedbackForm() {
       const res = await axios.post("/api/feedback", feedback);
       console.log(res);
       if (res.data === "New Feedback successsfully saved.") {
-        const updatedFeedbacks = await useUpdateFeedbacks()
+        const updatedFeedbacks = await getUpdatedFeedbacks()
         dispatch(setFeedbacks(updatedFeedbacks));
         setFeedback({
           title: "",

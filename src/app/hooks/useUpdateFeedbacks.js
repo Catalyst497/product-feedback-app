@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-function useUpdateFeedbacks() {
+export default function useUpdateFeedbacks() {
 
   const fetchData = async () => {
     const response = await axios.get("/api/feedback");
@@ -11,8 +11,6 @@ function useUpdateFeedbacks() {
     console.log(updatedFeedbacks);
     return updatedFeedbacks;
   };
-  return fetchData();
+  return fetchData;
 
 }
-
-export default useUpdateFeedbacks;

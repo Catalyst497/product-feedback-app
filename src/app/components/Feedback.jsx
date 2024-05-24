@@ -10,6 +10,7 @@ import { setFeedbacks } from "../GlobalRedux/slices/AppSlice";
 function Feedback({ title, main, author, id }) {
   const dispatch = useDispatch();
   const { isMobile } = useScreenSize();
+  const getUpdatedFeedbacks = useUpdateFeedbacks()
   const { user } = useSelector((state) => state.user);
   const [openFeedbackOptions, setOpenFeedbackOptions] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -45,11 +46,10 @@ function Feedback({ title, main, author, id }) {
   }, [feedbackUpdate]);
 
   const deleteFeedback = async () => {
-    console.log(id);
     const response = await axios.delete("/api/feedback", { data: { id } });
     console.log(response);
     if (response.data === "Feedback deleted successfully.") {
-      const updatedFeedbacks = await useUpdateFeedbacks();
+      const updatedFeedbacks = await getUpdatedFeedbacks();
       dispatch(setFeedbacks(updatedFeedbacks));
       setOpenFeedbackOptions(false);
     }
@@ -64,7 +64,7 @@ function Feedback({ title, main, author, id }) {
     });
     console.log(response);
     if (response.data === "Feedback updated successfully.") {
-      const updatedFeedbacks = await useUpdateFeedbacks();
+      const updatedFeedbacks = await getUpdatedFeedbacks();
       dispatch(setFeedbacks(updatedFeedbacks));
       setOpenFeedbackOptions(false);
       setEditMode(false);
